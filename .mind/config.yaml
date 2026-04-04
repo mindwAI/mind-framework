@@ -1,0 +1,35 @@
+# MIND Framework — Project Configuration
+# Copy this file to your project's .mind/config.yaml and customize.
+
+project_name: "my-project"
+language: "en"  # en | pt-BR
+
+# Pipeline: ordered list of commands that define your workflow.
+# Each step references a command in .mind/commands/.
+# Steps marked optional: true can be skipped.
+pipeline:
+  - name: create-prd
+    description: "Specify product requirements"
+  - name: clarify-prd
+    description: "Resolve PRD ambiguities"
+    optional: true
+  - name: create-techspec
+    description: "Design technical solution"
+  - name: validate-spec
+    description: "Cross-validate PRD x TechSpec"
+    optional: true
+  - name: create-tasks
+    description: "Decompose into incremental tasks"
+  - name: execute-task
+    description: "Implement each task"
+  - name: execute-review
+    description: "Review produced code"
+  - name: execute-qa
+    description: "Validate requirements and quality"
+
+# Conventions: reference rules that apply to this project.
+# Each entry references a file in .mind/rules/.
+conventions:
+  - code-standards
+  - git-branching
+  - tests

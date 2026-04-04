@@ -1,0 +1,25 @@
+# MIND Framework — Hello World Example
+# Minimal configuration using framework defaults.
+
+project_name: "hello-world"
+language: "en"
+
+pipeline:
+  - name: create-prd
+    description: "Specify product requirements"
+  - name: clarify-prd
+    description: "Resolve PRD ambiguities"
+    optional: true
+  - name: create-techspec
+    description: "Design technical solution"
+  - name: create-tasks
+    description: "Decompose into incremental tasks"
+  - name: execute-task
+    description: "Implement each task"
+  - name: execute-review
+    description: "Review produced code"
+
+conventions:
+  - code-standards
+  - git-branching
+  - tests
