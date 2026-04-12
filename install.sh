@@ -179,13 +179,23 @@ https://mindwai.com
 MINDEOF
 
 # --- Create shim files ---
-for shim in AGENTS.md CLAUDE.md .cursorrules; do
-  cat > "$TARGET/$shim" << EOF
-# $shim
-# This project uses the MIND Framework. Read MIND.md for the full index.
-Read MIND.md first, then follow the rules and commands defined there.
+cat > "$TARGET/AGENTS.md" << 'EOF'
+# AGENTS.md
+This project uses the MIND Framework.
+See ./MIND.md for operating instructions.
 EOF
-done
+
+cat > "$TARGET/CLAUDE.md" << 'EOF'
+# CLAUDE.md
+This project uses the MIND Framework.
+See ./MIND.md for operating instructions.
+EOF
+
+cat > "$TARGET/.cursorrules" << 'EOF'
+This project uses the MIND Framework.
+See ./MIND.md for operating instructions.
+Follow the pipeline defined in .mind/config.yaml.
+EOF
 
 echo ""
 echo "MIND Framework installed successfully!"
