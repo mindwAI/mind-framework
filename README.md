@@ -79,11 +79,11 @@ See the full agent index in [MIND.md](MIND.md). Browse a complete example in [ex
 
 | Use case | Framework (local, free) | mindwAI (hosted) |
 |---|---|---|
-| Solo developer | Full pipeline via markdown | Full pipeline + enforcement |
-| Code review | Single-agent review | Adversarial multi-agent review |
-| Project memory | Git history | Persistent memory across sessions |
-| Multiple features | Manual coordination | Automated orchestration |
-| Team collaboration | Git-based workflow | Role-based access + approvals |
+| Solo developer | Full pipeline via markdown | Full pipeline + more |
+| Code review | You set up the reviewer agent | Built-in review without config |
+| Project memory | Git history | Remembers across sessions |
+| Multiple features | Manual coordination | Scales without coordination work |
+| Team collaboration | Git-based workflow | Built for teams |
 | Setup | 1 command, zero dependencies | Account + API key |
 | Cost | Free, open source | Free tier available |
 
