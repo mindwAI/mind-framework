@@ -1,64 +1,48 @@
 # Hello World — MIND Framework Example
 
-A minimal example showing how a project uses the MIND Framework.
+You are looking at the output of a complete MIND Framework pipeline run.
 
-## Structure
+The todo-app described in these artifacts is **fictitious** — there is no
+runnable code here. The purpose is to show **what artifacts the framework
+produces** when you run the full pipeline from PRD to QA.
 
-```
-hello-world/
-├── .mind/
-│   └── config.yaml    ← Project config (inherits framework defaults)
-└── README.md
-```
-
-## How It Works
-
-This example project uses the MIND Framework with default configuration. The `.mind/config.yaml` points to the framework's standard personas, commands, rules, and templates.
-
-## Try It
-
-### 1. Create a PRD
-
-Tell your AI agent:
+## What's here
 
 ```
-Read .mind/commands/create-prd.md from the MIND Framework and follow the
-instructions to create a PRD for a simple TODO API.
-
-Adopt the persona in .mind/personas/product-owner.md.
-Use the template in .mind/templates/prd-template.md.
+.mind/features/feat-001-todo-app/
+├── prd.md              Product requirements (what to build and why)
+├── techspec.md         Technical design (how to build it)
+├── tasks/
+│   ├── task-001.md     Setup + POST /todos
+│   ├── task-002.md     GET /todos with filtering
+│   └── task-003.md     PATCH /todos/:id/complete
+├── reviews/
+│   └── review-001.md   Code review (found 2 real bugs)
+└── qa/
+    └── qa-001.md       QA validation (all FRs pass, bugs fixed)
 ```
 
-The agent will:
-1. Ask clarification questions (not jump to writing)
-2. Plan the PRD structure
-3. Write a PRD following the template
-4. Present it for your approval
+## Suggested reading order
 
-### 2. Create a TechSpec
+Read the artifacts in pipeline order — each one builds on the previous:
 
-```
-Read .mind/commands/create-techspec.md and create a TechSpec for the
-TODO API based on the PRD we just created.
+1. **prd.md** — What problem we're solving, the 3 endpoints, acceptance criteria
+2. **techspec.md** — Express routes, SQLite schema, test strategy
+3. **task-001.md** — First task: project setup + POST endpoint
+4. **task-002.md** — Second task: GET with filtering
+5. **task-003.md** — Third task: PATCH complete + validation
+6. **review-001.md** — Code review that found 2 real bugs (not "looks good")
+7. **qa-001.md** — QA that verified all 11 FRs + confirmed bugs were fixed
 
-Adopt the persona in .mind/personas/senior-developer.md.
-Use the template in .mind/templates/techspec-template.md.
-```
+Notice how each artifact references the ones before it. The review points
+to specific code issues. The QA traces back to PRD requirements by number.
+This coherence is what the MIND Framework enforces.
 
-### 3. Create Tasks
+## How to produce similar artifacts
 
-```
-Read .mind/commands/create-tasks.md and decompose the TODO API feature
-into tasks based on the PRD and TechSpec.
-```
+Install the MIND Framework in your project and tell your AI agent:
 
-### 4. Implement and Review
+> Read MIND.md and create a PRD for [your feature].
 
-```
-Read .mind/commands/execute-task.md and implement the first task.
-Then read .mind/commands/execute-review.md to review the code.
-```
-
-## Customization
-
-To add project-specific rules, create new `.md` files in `.mind/rules/` and reference them in `config.yaml`.
+See the [main README](../../README.md) for installation instructions
+and [MIND.md](../../MIND.md) for the full framework index.

@@ -1,15 +1,12 @@
 # MIND Framework — Hello World Example
-# Minimal configuration using framework defaults.
+# Simplified pipeline showing that optional steps can be skipped.
 
-project_name: "hello-world"
+project_name: "hello-world-todo-app"
 language: "en"
 
 pipeline:
   - name: create-prd
     description: "Specify product requirements"
-  - name: clarify-prd
-    description: "Resolve PRD ambiguities"
-    optional: true
   - name: create-techspec
     description: "Design technical solution"
   - name: create-tasks
@@ -18,6 +15,8 @@ pipeline:
     description: "Implement each task"
   - name: execute-review
     description: "Review produced code"
+  - name: execute-qa
+    description: "Validate requirements and quality"
 
 conventions:
   - code-standards
