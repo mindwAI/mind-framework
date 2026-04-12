@@ -80,9 +80,11 @@ cat > "$TARGET/MIND.md" << MINDEOF
 
 ## Rules (read these first)
 
-Before any task, read the applicable rules:
+Before any task, read the applicable rules in this order:
 
-$RULES_LIST
+1. [code-standards](.mind/rules/code-standards.md) -- naming, size limits, side effects, nesting
+2. [tests](.mind/rules/tests.md) -- AAA/GWT structure, coverage, mocking, anti-patterns
+3. [git-branching](.mind/rules/git-branching.md) -- branch strategy, naming, merge flow
 
 Add project-specific rules to .mind/rules/ and run ./install.sh --update.
 
@@ -118,6 +120,17 @@ Features live in \`.mind/features/{feature-id}/\` with:
   reviews/review-001.md
   qa/qa-001.md
 \`\`\`
+
+## Task Lifecycle
+
+Every task follows a strict state machine:
+
+1. **claim** -- agent claims the task, status becomes working
+2. **implement** -- agent writes code, commits to task branch
+3. **submit_qa** -- agent submits QA verdict (PASS/FAIL + findings)
+4. **complete** -- task marked done after QA passes
+
+Skipping states leads to state corruption. Always follow the full sequence.
 
 ## Personas
 
