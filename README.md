@@ -3,207 +3,114 @@
 </p>
 
 <p align="center">
-  Open-source methodology for AI-assisted software engineering.
+  Structure how AI agents work on your code.
 </p>
 
 <p align="center">
-  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-0.0.1-blue" alt="version"></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-0.1.0-blue" alt="version"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-green" alt="license"></a>
 </p>
 
 ---
 
-Structure your AI workflow with **personas**, **commands**, **rules**, and **templates**. Works with any agent — Claude Code, Cursor, Copilot, Codex, or any AI that reads markdown.
-
 ## What is this?
 
-The MIND Framework is a set of markdown files that define how AI agents should work on software projects. Instead of ad-hoc prompting, you get a structured pipeline that guides the agent from requirements to tested code.
+AI agents are powerful but inconsistent. Without structure, they skip clarification, approve their own reviews, ignore project standards, and start every session from zero.
 
-It solves three problems with unstructured AI-assisted development:
+The MIND Framework fixes this with markdown files your agent reads before writing code:
 
-1. **Agents skip clarification** — they jump straight to code instead of understanding requirements
-2. **Agents rationalize to approve** — code reviews and QA pass things that shouldn't pass
-3. **Agents ignore project standards** — each session starts from zero without consistent conventions
+- **Personas** define how each role behaves (developer, reviewer, QA)
+- **Commands** define what to do at each pipeline step
+- **Rules** define your project's standards
+- **Templates** define the format of every artifact
+
+It works with any AI agent that can read files. No vendor lock-in, no runtime, no dependencies.
+
+### Why markdown?
+
+Every AI coding tool — regardless of vendor — can read markdown from disk. By putting your engineering process in `.mind/*.md` files, you get a portable, version-controlled, human-readable governance layer that travels with your repo.
 
 ## Quick Start
 
-### 1. Copy `.mind/` to your project
+### The easy path (one command)
 
 ```bash
-git clone https://github.com/mindwai/mind-framework.git
-cp -r mind-framework/.mind/ your-project/.mind/
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/mindwai/mind-framework/main/setup.sh)"
 ```
 
-### 2. Edit the config
+This clones the framework, copies `.mind/` into your current directory, generates `MIND.md`, and cleans up.
 
-```yaml
-# your-project/.mind/config.yaml
-project_name: "your-project"
-language: "en"
+### The transparent path (see what you're installing)
+
+```bash
+git clone https://github.com/mindwai/mind-framework.git /tmp/mind
+/tmp/mind/install.sh .
+rm -rf /tmp/mind
 ```
 
-### 3. Use with your AI agent
+### After install
 
-**With Claude Code:**
-
-```
-Read .mind/commands/create-prd.md and follow the instructions to create
-a PRD for [describe your feature].
-
-Adopt the persona in .mind/personas/product-owner.md.
-Follow the rules in .mind/rules/.
-Use the template in .mind/templates/prd-template.md.
+```bash
+cat MIND.md
 ```
 
-**With Cursor / Copilot / any AI:**
+Then open your AI agent and say:
 
-Add to your system prompt or rules file:
+> Read MIND.md and create a PRD for [describe your feature].
 
-```
-Before working on any feature, read the relevant files in .mind/:
-- .mind/personas/ for your role behavior
-- .mind/commands/ for step-by-step instructions
-- .mind/rules/ for project standards
-- .mind/templates/ for output formats
-```
+That's it. The agent reads the rules, adopts the persona, follows the command, and uses the template.
 
-## Pipeline
-
-The framework defines an 8-step pipeline from requirements to tested code:
-
-```
-create-prd → clarify-prd → create-techspec → validate-spec → create-tasks → execute-task → execute-review → execute-qa
-```
-
-| Step | What it does | Persona |
-|------|-------------|---------|
-| `create-prd` | Specify product requirements | product-owner |
-| `clarify-prd` | Resolve PRD ambiguities | product-owner |
-| `create-techspec` | Design technical solution | senior-developer |
-| `validate-spec` | Cross-validate PRD x TechSpec | qa-engineer |
-| `create-tasks` | Decompose into incremental tasks | senior-developer |
-| `execute-task` | Implement each task | senior-developer |
-| `execute-review` | Review produced code | code-reviewer |
-| `execute-qa` | Validate requirements and quality | qa-engineer |
-
-You don't need to use all steps. Start with `execute-task` + `execute-review` for immediate value.
-
-## Structure
+## What you get
 
 ```
 .mind/
-├── config.yaml              # Project configuration
-├── personas/                # How each role behaves
-│   ├── senior-developer.md
-│   ├── code-reviewer.md
-│   ├── qa-engineer.md
-│   ├── tech-writer.md
-│   └── product-owner.md
-├── commands/                # What to do at each pipeline step
-│   ├── create-prd.md
-│   ├── clarify-prd.md
-│   ├── create-techspec.md
-│   ├── validate-spec.md
-│   ├── create-tasks.md
-│   ├── execute-task.md
-│   ├── execute-review.md
-│   └── execute-qa.md
-├── rules/                   # Project standards and conventions
-│   ├── code-standards.md
-│   ├── git-branching.md
-│   └── tests.md
-└── templates/               # Artifact formats
-    ├── prd-template.md
-    ├── techspec-template.md
-    ├── qa-checklist-template.md
-    └── feature-template.md
+├── config.yaml       Pipeline definition
+├── personas/          5 role behaviors (dev, reviewer, QA, writer, PO)
+├── commands/          8 pipeline steps (PRD → techspec → tasks → implement → review → QA)
+├── rules/             3 starter standards (code, git, tests)
+└── templates/         4 artifact formats (PRD, techspec, QA checklist, feature)
 ```
 
-## Key Concepts
+Plus: `MIND.md` (agent index) and shim files so any AI tool finds the framework automatically.
 
-### Personas
+See the full agent index in [MIND.md](MIND.md). Browse a complete example in [examples/hello-world/](examples/hello-world/).
 
-Personas define **how** the agent should behave in each role. They include operational principles, anti-patterns, and checklists — not just descriptions.
+## Framework vs mindwAI
 
-### Anti-Rationalization
+| Use case | Framework (local, free) | mindwAI (hosted) |
+|---|---|---|
+| Solo developer | Full pipeline via markdown | Full pipeline + enforcement |
+| Code review | Single-agent review | Adversarial multi-agent review |
+| Project memory | Git history | Persistent memory across sessions |
+| Multiple features | Manual coordination | Automated orchestration |
+| Team collaboration | Git-based workflow | Role-based access + approvals |
+| Setup | 1 command, zero dependencies | Account + API key |
+| Cost | Free, open source | Free tier available |
 
-The most important differentiator. LLMs tend to rationalize to approve — building justifications to say "yes". MIND personas for review and QA explicitly instruct:
+The framework is the methodology. [mindwAI](https://mindwai.com) is the hosted service for teams that outgrow local markdown files.
 
-> *"If you are building a justification to approve, that is a signal to reject."*
+## Documentation
 
-This combats the approval bias that makes unstructured AI code reviews unreliable.
-
-### Rules as Guardrails
-
-Rules are project standards that agents read dynamically. They're separate from commands because they change per project. The framework includes 3 starter rules (code standards, git branching, tests). Add your own for project-specific conventions.
-
-### Templates
-
-Templates ensure consistent artifact format. Every PRD follows the same structure. Every TechSpec covers the same dimensions. Every QA checklist checks the same foundations.
-
-## Customization
-
-### Add custom rules
-
-Create new `.md` files in `.mind/rules/`:
-
-```markdown
-# API Standards
-
-[Your project's API conventions...]
-```
-
-Reference them in `config.yaml`:
-
-```yaml
-conventions:
-  - code-standards
-  - git-branching
-  - tests
-  - api-standards  # your new rule
-```
-
-### Add custom personas
-
-Create new `.md` files in `.mind/personas/` following the same format:
-
-```yaml
----
-name: security-reviewer
-description: "Security review specialist..."
----
-```
-
-### Modify the pipeline
-
-Edit `config.yaml` to add, remove, or reorder steps. Each step references a command file.
-
-## Want More?
-
-The MIND Framework is the open-source methodology layer. For teams that need enforcement, governance, and automation:
-
-**[MIND-GO](https://mindwai.com)** adds:
-- Pipeline engine with automatic step routing
-- Adversarial QA with enforcement (no self-approval)
-- Memory system for decisions, patterns, and learnings
-- Hooks and lifecycle events
-- Multi-agent orchestration
+- [Customization guide](docs/customization.md) — add personas, rules, templates
+- [Writing personas](docs/writing-personas.md) — create new agent behaviors
+- [Migration to mindwAI](docs/migration-to-mindwai.md) — when and why to consider hosted
 
 ## Contributing
 
-Contributions are welcome. Please:
+Contributions welcome. Please:
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/my-change`)
-3. Make your changes
-4. Submit a pull request
+2. Create a feature branch
+3. Submit a pull request
 
-For major changes, open an issue first to discuss the approach.
+For major changes, open an issue first.
 
 ## License
 
-[Apache 2.0](LICENSE) — use it freely in personal and commercial projects.
+[Apache 2.0](LICENSE) — use freely in personal and commercial projects.
 
 ---
 
-<p align="center">Made in Brazil 🇧🇷</p>
+<p align="center">
+  <a href="https://github.com/mindwai/mind-framework">GitHub</a> · <a href="https://mindwai.com">mindwAI</a>
+</p>
