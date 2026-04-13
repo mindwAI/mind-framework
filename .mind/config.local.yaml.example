@@ -1,0 +1,22 @@
+# Personal overrides — copy this file to config.local.yaml and customize.
+# This file is gitignored. Your preferences stay local.
+#
+# Merge strategy: config.local.yaml overrides config.yaml on key conflict.
+# For nested objects (like pipeline), the local version replaces the shared one entirely.
+
+# Override language preference
+# language: "pt-BR"
+
+# Use a shorter pipeline for personal workflow
+# pipeline:
+#   - name: execute-task
+#     description: "Implement each task"
+#   - name: execute-review
+#     description: "Review produced code"
+
+# Add project-specific conventions without modifying shared config
+# conventions:
+#   - code-standards
+#   - git-branching
+#   - tests
+#   - my-team-standards

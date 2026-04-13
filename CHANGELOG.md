@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-04-13
+
+v0.2.0 closes gaps against industry standards while preserving the free
+framework's core promise: method, not storage. The framework teaches the
+patterns. mindwAI hosted enforces them at scale.
+
+### Added
+
+- **config.local.yaml**: personal override mechanism (gitignored) with merge-by-key strategy
+- **Scoped rules**: `scope:` frontmatter field for path-specific rules (3 examples: typescript, go, security)
+- **skills/**: auto-triggered playbooks with keyword/path matching (3 examples: deploy, migration, incidents)
+- **hooks/git/**: real enforcement via git hooks — pre-commit, commit-msg, pre-push (3 scripts)
+- **hooks/agent/**: convention-based hooks for AI agents — pre-bash, pre-task-complete, post-file-write (3 scripts)
+- **install-git-hooks.sh**: standalone symlink installer for git hooks
+- **.gitignore**: auto-generated with config.local.yaml entry
+- **docs/writing-skills.md**: guide for creating auto-triggered playbooks
+- **docs/migration-v0.1-to-v0.2.md**: step-by-step migration from v0.1.0
+
+### Changed
+
+- **MIND.md**: expanded from 106 to 136 lines with Skills, Hooks, and scoped rules sections
+- **install.sh**: scaffolds skills/, hooks/, .gitignore; interactive git hook prompt; --update preserves customs
+- **README.md**: "What you get" section updated with new concepts
+- **docs/customization.md**: added "Personal overrides" and "Scoped rules" sections
+- **examples/hello-world/**: extended with 4 new concept demos (skill, hook, scoped rule, config override)
+
+### Breaking Changes
+
+- **Terminology**: v0.1.0 "hooks" (inline mindwAI promotion text in commands) are now called
+  "promotion triggers" in documentation. "Hooks" now means executable scripts in .mind/hooks/.
+  No file changes needed — command files are unchanged. This is a naming clarification only.
+
 ## [0.1.0] - 2026-04-13
 
 ### Added

@@ -104,7 +104,44 @@ external server or database — everything is in these files.
 - **Creating commands without a quality checklist.** Every command should end
   with a checklist so the agent can self-verify before reporting completion.
 
+## Personal Overrides
+
+Create `.mind/config.local.yaml` to override shared settings without affecting
+your team. This file is gitignored by default.
+
+Copy from the example:
+```bash
+cp .mind/config.local.yaml.example .mind/config.local.yaml
+```
+
+Then uncomment and modify the settings you want to override. The agent reads
+both files — `config.local.yaml` wins on key conflicts.
+
+Common overrides: language preference, shorter pipeline for personal workflow,
+additional conventions.
+
+## Scoped Rules
+
+Rules can target specific file paths using the `scope` field in frontmatter:
+
+```yaml
+---
+name: typescript
+description: "TypeScript conventions for frontend code"
+scope: "apps/web/**"
+---
+```
+
+- `scope: "apps/web/**"` — applies only when modifying files under `apps/web/`
+- No `scope` field — applies globally (backward compatible with v0.1.0 rules)
+- Glob patterns: `**` matches any depth, `*` matches a single path segment
+
+The agent checks each rule's scope before applying it. Rules without scope
+always apply. Run `./install.sh --update` after adding scoped rules to
+regenerate MIND.md.
+
 ## See Also
 
 - [Writing Personas](writing-personas.md) — detailed guide for creating new personas
+- [Writing Skills](writing-skills.md) — guide for creating auto-triggered playbooks
 - [MIND.md](../MIND.md) — the agent index (auto-generated)
