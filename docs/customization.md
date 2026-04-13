@@ -1,6 +1,6 @@
 # Customizing the MIND Framework
 
-The framework ships with sensible defaults: 5 personas, 8 commands, 3 rules,
+The framework ships with sensible defaults: 5 personas, 8 commands, 6 rules (3 global + 3 scoped),
 and 4 templates. You can extend or modify all of them to match your project.
 
 After any change, run `./install.sh --update` to regenerate MIND.md with your

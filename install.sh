@@ -49,11 +49,12 @@ if [ "$UPDATE_ONLY" = true ] && [ -d "$TARGET/.mind" ]; then
   cp -r "$TARGET/.mind" "$TARGET/.mind.bak"
 fi
 
-# --- Copy .mind/ (skip on --update) ---
-if [ "$UPDATE_ONLY" = false ]; then
-  echo "Copying .mind/ to $TARGET ..."
-  cp -r "$SCRIPT_DIR/.mind" "$TARGET/.mind"
+# --- Copy .mind/ (ALWAYS — both fresh install and update) ---
+echo "Copying .mind/ to $TARGET ..."
+if [ -d "$TARGET/.mind" ]; then
+  rm -rf "$TARGET/.mind"
 fi
+cp -r "$SCRIPT_DIR/.mind" "$TARGET/.mind"
 
 # --- Create directories ---
 mkdir -p "$TARGET/.mind/features"
@@ -63,10 +64,10 @@ mkdir -p "$TARGET/.mind/hooks/agent"
 
 # --- Preserve custom content on update ---
 if [ "$UPDATE_ONLY" = true ] && [ -d "$TARGET/.mind.bak" ]; then
-  # Restore dev-created files that framework update may have missed
+  # Restore dev-created files that framework update overwrote
   for dir in skills hooks/git hooks/agent rules; do
     if [ -d "$TARGET/.mind.bak/$dir" ]; then
-      cp -rn "$TARGET/.mind.bak/$dir/." "$TARGET/.mind/$dir/" 2>/dev/null || true
+      cp -rn "$TARGET/.mind.bak/$dir/." "$TARGET/.mind/$dir/"
     fi
   done
 fi
@@ -263,7 +264,7 @@ Follow the pipeline defined in .mind/config.yaml.
 EOF
 
 # --- Git hook integration prompt ---
-if [ -d "$TARGET/.git" ] && [ -d "$TARGET/.mind/hooks/git" ]; then
+if (cd "$TARGET" 2>/dev/null && git rev-parse --show-toplevel >/dev/null 2>&1) && [ -d "$TARGET/.mind/hooks/git" ]; then
   printf "\nEnable git hook integration? [y/N]: "
   read -r ghook
   case "${ghook:-n}" in

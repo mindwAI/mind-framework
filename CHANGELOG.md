@@ -5,11 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2026-04-13
+
+### Fixed
+
+- **install.sh --update**: now copies source .mind/ before restoring customs (was silently skipping copy, leaving target stale)
+- **install.sh git hook prompt**: detects git repo via `git rev-parse` instead of checking `$TARGET/.git` (works in subdirectories)
+- **pre-commit.sh**: removed incorrect commit-subject validation (belonged in commit-msg.sh); now validates only staged content
+- **commit-msg.sh**: regex now accepts breaking change syntax (`feat!:`, `type(scope)!:`)
+- **pre-bash.sh**: anchored blocklist to extract target path precisely; `rm -rf /tmp/*` no longer false-blocked; `$HOME`/`${HOME}` variants now blocked
+- **pre-task-complete.sh**: no longer reports "Tests pass" when no test runner detected; says "Validation skipped" instead
+- **docs/customization.md**: corrected rule count from 3 to 6 (3 global + 3 scoped)
+- **CHANGELOG [0.2.0]**: removed premature positioning language
+
+Post cross-provider review by Codex GPT-5.4 (dec-002). Also fixed nested .mind/.mind/ bug in cp -r discovered during real testing.
+
 ## [0.2.0] - 2026-04-13
 
-v0.2.0 closes gaps against industry standards while preserving the free
-framework's core promise: method, not storage. The framework teaches the
-patterns. mindwAI hosted enforces them at scale.
+v0.2.0 closes four gaps against industry standards for AI coding frameworks,
+adding personal config overrides, path-scoped rules, auto-triggered skills,
+and hybrid executable hooks. The framework's core promise is preserved:
+method over tooling, convention over runtime.
 
 ### Added
 
