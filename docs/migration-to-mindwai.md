@@ -10,10 +10,9 @@ controls: who can approve reviews, who can merge, who owns which feature.
 The framework relies on trust and git discipline. That works with 1-2 people
 but gets fragile with more.
 
-**Review quality.** The framework lets the same AI agent write code and review
-it. That is a single-agent review — fast but not adversarial. When you need a
-second opinion that genuinely challenges the first, you need a separate
-reviewer that was not involved in implementation.
+**Review quality.** Single-session review has limits. When you need review
+quality beyond what a single session provides — a perspective that wasn't
+shaped by the implementation context — local markdown alone won't cover it.
 
 **Memory across sessions.** The framework stores everything in markdown files
 and git history. When you close your AI session, context is lost. If you want
