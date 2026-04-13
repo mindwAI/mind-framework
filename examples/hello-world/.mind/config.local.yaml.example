@@ -1,0 +1,12 @@
+# Personal overrides for the hello-world example.
+# Copy to config.local.yaml to customize without affecting the shared config.
+#
+# This file is NOT gitignored in the example (so you can see it).
+# In a real project, config.local.yaml would be gitignored.
+
+# language: "pt-BR"
+# pipeline:
+#   - name: execute-task
+#     description: "Implement each task"
+#   - name: execute-review
+#     description: "Review produced code"

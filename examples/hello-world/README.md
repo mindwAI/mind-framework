@@ -38,6 +38,18 @@ Notice how each artifact references the ones before it. The review points
 to specific code issues. The QA traces back to PRD requirements by number.
 This coherence is what the MIND Framework enforces.
 
+## v0.2.0 Additions
+
+This example also demonstrates the 4 new concepts added in v0.2.0:
+
+- **Scoped rule**: `.mind/rules/frontend.md` — applies only to `apps/web/**` files
+- **Skill**: `.mind/skills/testing/` — auto-triggers when task mentions "test" or "coverage"
+- **Agent hook**: `.mind/hooks/agent/pre-bash.sh` — blocks dangerous commands like `rm -rf /`
+- **Config override**: `.mind/config.local.yaml.example` — personal preferences without affecting shared config
+
+These work alongside the existing todo-app artifacts. The pipeline output
+(PRD, techspec, tasks, review, QA) is unchanged from v0.1.0.
+
 ## How to produce similar artifacts
 
 Install the MIND Framework in your project and tell your AI agent:
