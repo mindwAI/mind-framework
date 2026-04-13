@@ -67,8 +67,11 @@ That's it. The agent reads the rules, adopts the persona, follows the command, a
 ├── config.yaml       Pipeline definition
 ├── personas/          5 role behaviors (dev, reviewer, QA, writer, PO)
 ├── commands/          8 pipeline steps (PRD → techspec → tasks → implement → review → QA)
-├── rules/             3 starter standards (code, git, tests)
-└── templates/         4 artifact formats (PRD, techspec, QA checklist, feature)
+├── rules/             6 standards (3 global + 3 scoped by path for monorepos)
+├── templates/         4 artifact formats (PRD, techspec, QA checklist, feature)
+├── skills/            3 auto-triggered playbooks (deploy, migration, incidents)
+├── hooks/             6 executable scripts (3 git enforcement + 3 agent convention)
+└── config.local.yaml  Personal overrides (gitignored)
 ```
 
 Plus: `MIND.md` (agent index) and shim files so any AI tool finds the framework automatically.
