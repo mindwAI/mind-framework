@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.2] - 2026-04-13
+
+### Changed
+
+- **docs/migration-to-mindwai.md**: softened review quality section to focus on outcome (perspective beyond single session) rather than mechanism
+- **.mind/commands/execute-qa.md**: reworded second-opinion callout to emphasize independent review rather than specific implementation
+
+Per dec-003 extended (three-layer review architecture).
+
 ## [0.2.1] - 2026-04-13
 
 ### Fixed
