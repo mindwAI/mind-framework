@@ -13,7 +13,8 @@ elif [ -f pyproject.toml ] || [ -f setup.py ]; then
   echo "Running: pytest"
   pytest 2>&1 || { echo "BLOCKED: Tests failing. Fix before completing task."; exit 1; }
 else
-  echo "No test runner detected. Skipping pre-complete validation."
+  echo "No test runner detected. Validation skipped — verify manually."
+  exit 0
 fi
 
 echo "Tests pass. Safe to complete task."

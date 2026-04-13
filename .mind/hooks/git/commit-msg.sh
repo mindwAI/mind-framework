@@ -10,7 +10,7 @@ case "$MSG" in
   Merge*) exit 0 ;;
 esac
 
-if ! echo "$MSG" | grep -qE '^(feat|fix|chore|docs|style|refactor|test|ci|perf|build|revert)(\(.+\))?: .{3,}'; then
+if ! echo "$MSG" | grep -qE '^(feat|fix|chore|docs|style|refactor|test|ci|perf|build|revert)(\(.+\))?!?: .{3,}'; then
   echo "ERROR: Commit message must follow conventional commits format."
   echo ""
   echo "  Format: type(scope): description"
